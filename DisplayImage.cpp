@@ -8,34 +8,45 @@ using namespace std;
 
 Mat src;
 char window_name[4] = "aaa";
+int R, G, B, H, S, V;
+
 static void onMouse(int event, int x, int y, int f, void* )
 {
 	Mat image = src.clone();
-	Vec3b rgb = image.at<Vec3b>(y,x);
-
+	Vec3b rgb; 
 	Mat Lab;
-	Mat RGB=image(Rect(x,y,1, 1));
-	cvtColor(RGB, Lab, COLOR_BGR2Lab); 
-
-	Vec3b hsv = Lab.at<Vec3b>(0, 0);
-	int B = hsv.val[0];
-	int G = hsv.val[1];
-	int R = hsv.val[2];
-
+	Mat RGB; 
+	Vec3b hsv;
 	Mat HSV;
-	cvtColor(RGB, HSV, COLOR_BGR2HSV); 
 
-    hsv = HSV.at<Vec3b>(0, 0);
-	int H = hsv.val[0];
-	int S = hsv.val[1];
-	int V = hsv.val[2];
+	if(event == EVENT_LBUTTONDOWN)
+	{
+		rgb = image.at<Vec3b>(y,x);
+
+		Lab;
+		RGB=image(Rect(x,y,1, 1));
+		cvtColor(RGB, Lab, COLOR_BGR2Lab); 
+
+		hsv = Lab.at<Vec3b>(0, 0);
+		B = hsv.val[0];
+		G = hsv.val[1];
+		R = hsv.val[2];
+
+		cvtColor(RGB, HSV, COLOR_BGR2HSV); 
+
+		hsv = HSV.at<Vec3b>(0, 0);
+		H = hsv.val[0];
+		S = hsv.val[1];
+		V = hsv.val[2];
+
+	}
 
 	char name[30];
-	sprintf(name, "B=%d", B);
+	sprintf(name, "L=%d", B);
 	putText(image, name, Point(150, 40), FONT_HERSHEY_SIMPLEX, .7, Scalar(0, 255, 0), 2, 8, false);
-	sprintf(name, "G=%d", G);
+	sprintf(name, "a=%d", G);
 	putText(image, name, Point(250, 40), FONT_HERSHEY_SIMPLEX, .7, Scalar(0, 255, 0), 2, 8, false);
-	sprintf(name, "R=%d", R);
+	sprintf(name, "b=%d", R);
 	putText(image, name, Point(350, 40), FONT_HERSHEY_SIMPLEX, .7, Scalar(0, 255, 0), 2, 8, false);
 	sprintf(name, "H=%d", H);
 	putText(image, name, Point(450, 40), FONT_HERSHEY_SIMPLEX, .7, Scalar(0, 255, 0), 2, 8, false);
@@ -43,7 +54,7 @@ static void onMouse(int event, int x, int y, int f, void* )
 	putText(image, name, Point(550, 40), FONT_HERSHEY_SIMPLEX, .7, Scalar(0, 255, 0), 2, 8, false);
 	sprintf(name, "V=%d", V);
 	putText(image, name, Point(650, 40), FONT_HERSHEY_SIMPLEX, .7, Scalar(0, 255, 0), 2, 8, false);
-	
+
 	imshow(window_name, image);
 }
 
