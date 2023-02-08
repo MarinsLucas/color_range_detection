@@ -1,0 +1,3 @@
+/home/lucas/test/CMakeFiles/rebuild_cache.dir
+/home/lucas/test/CMakeFiles/edit_cache.dir
+/home/lucas/test/CMakeFiles/DisplayImage.dir
